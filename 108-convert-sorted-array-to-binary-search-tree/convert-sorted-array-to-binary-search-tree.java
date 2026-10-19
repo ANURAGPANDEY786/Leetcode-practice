@@ -9,9 +9,9 @@ class Solution {
 }
     public TreeNode sortedArrayToBST(int[] nums) {
         int n=nums.length;
+        int l=0,h=n-1;
         
-        
-        return inorder(nums,0,n-1);
+        return inorder(nums,l,h);
         
 
         
