@@ -17,28 +17,59 @@
 //         }
 
 //         return true;
-        
+
 //     }
 // }
 
+//     class Solution {
+//     TreeNode prev = null;
 
-    class Solution {
-    TreeNode prev = null;
+//     boolean inorder(TreeNode root) {
+//         if (root == null) return true;
 
-    boolean inorder(TreeNode root) {
-        if (root == null) return true;
+//         if (!inorder(root.left)) return false;
 
-        if (!inorder(root.left)) return false;
+//         if (prev != null && prev.val >= root.val)
+//             return false;
 
-        if (prev != null && prev.val >= root.val)
-            return false;
+//         prev = root;
 
-        prev = root;
+//         return inorder(root.right);
+//     }
 
-        return inorder(root.right);
-    }
-
+//     public boolean isValidBST(TreeNode root) {
+//         return inorder(root);
+//     }
+// }
+class Solution {
     public boolean isValidBST(TreeNode root) {
-        return inorder(root);
+        
+        TreeNode cur = root;
+        long prev =Long.MIN_VALUE ;
+        while (cur != null) {
+            if (cur.left != null) {
+                TreeNode pre = cur.left;
+                while (pre.right != null && pre.right != cur)
+                    pre = pre.right;
+                if (pre.right == null) {
+                    pre.right = cur;
+                    cur = cur.left;
+                } else {
+                    pre.right = null;
+                if(cur.val<=prev) return false;
+                prev=cur.val;
+                    cur = cur.right;
+
+                }
+
+            } else {
+                if(cur.val<=prev) return false;
+                prev=cur.val;
+                cur = cur.right;
+
+            }
+        }
+        return true;
+
     }
 }
