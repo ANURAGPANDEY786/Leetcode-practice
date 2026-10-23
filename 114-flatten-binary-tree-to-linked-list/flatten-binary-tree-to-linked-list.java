@@ -71,7 +71,6 @@
 // }
 class Solution {
    void flatten(TreeNode root){
-    if(root==null) return;
          TreeNode cur=root;
         while(cur!=null){
             if(cur.left!=null){
